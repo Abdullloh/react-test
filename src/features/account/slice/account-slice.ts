@@ -17,15 +17,19 @@ export const accountSlice = createSlice({
     addUser: (state, { payload }) => {
       state.users = [...state.users, payload];
     },
+    updateUser: (state, { payload }) => {
+      state.users.splice(payload.idx, 1, payload.data);
+    },
     searchUser: (state, { payload }) => {
       state.users = payload
         ? data.filter((user) => user.email.includes(payload))
         : data;
     },
     deleteUser: (state, { payload }) => {
-      state.users = state.users.filter((item) => item.email !== payload);
+      state.users = data.filter((item) => item.email !== payload);
     },
   },
 });
 
-export const { deleteUser, addUser, searchUser } = accountSlice.actions;
+export const { deleteUser, addUser, searchUser, updateUser } =
+  accountSlice.actions;

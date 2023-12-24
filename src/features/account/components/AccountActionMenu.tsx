@@ -12,9 +12,10 @@ import { AddAcountDialog } from ".";
 
 interface IAccountActionMenu {
   data: IUser;
+  idx: number;
 }
 
-export const AccountActionMenu: FC<IAccountActionMenu> = ({ data }) => {
+export const AccountActionMenu: FC<IAccountActionMenu> = ({ data, idx }) => {
   const dispatch = useAppDispatch();
   const [openDialog] = useDialog(AddAcountDialog);
   const [openSuccessDialog] = useDialog(DialogSuccess);
@@ -27,6 +28,8 @@ export const AccountActionMenu: FC<IAccountActionMenu> = ({ data }) => {
   const handleEdit = () => {
     openDialog({
       data,
+      type: "update",
+      idx,
       resolve: () => {},
     });
   };

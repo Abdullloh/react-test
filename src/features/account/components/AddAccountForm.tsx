@@ -1,5 +1,5 @@
 import { Box, Button, Stack } from "@mui/material";
-import { DefaultValues, useForm } from "react-hook-form";
+import { DefaultValues, FieldErrors, useForm } from "react-hook-form";
 import { TextFieldController } from "../../../components/TextFieldController/TextFieldController";
 import { FC } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -20,11 +20,17 @@ export const AddAccountForm: FC<IAddAccountForm> = ({
   });
 
   const onSubmit = (values: any) => {
+    console.log(values);
+
     onValid(values);
   };
 
+  const onInvalid = (errors: FieldErrors<any>) => {
+    console.log("onInvalid", errors);
+  };
+
   return (
-    <Box component='form' onSubmit={handleSubmit(onSubmit)}>
+    <Box component='form' onSubmit={handleSubmit(onSubmit, onInvalid)}>
       <Box mb={2}>
         <TextFieldController
           label='name'

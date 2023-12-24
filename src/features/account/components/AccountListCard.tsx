@@ -89,7 +89,7 @@ export const AccountListCard: FC<IAccountListCard> = ({ data }) => {
               </Stack>
             </Stack>
             <Box>
-              <AccountActionMenu data={user} />
+              <AccountActionMenu data={user} idx={idx} />
             </Box>
           </Stack>
         ))}
