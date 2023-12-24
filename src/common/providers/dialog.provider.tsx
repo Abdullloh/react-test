@@ -33,7 +33,7 @@ export const DialogProvider: ComponentType<PropsWithChildren<any>> = ({
   );
 
   const popDialog = useCallback(
-    (e: any, result: any) => {
+    (_: any, result: any) => {
       const dialog = dialogs.pop();
 
       if (dialog && Array.isArray(dialog)) {
