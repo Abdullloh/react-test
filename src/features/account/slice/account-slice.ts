@@ -26,7 +26,7 @@ export const accountSlice = createSlice({
         : data;
     },
     deleteUser: (state, { payload }) => {
-      state.users = data.filter((item) => item.email !== payload);
+      state.users = state.users.filter((item) => item.email !== payload);
     },
   },
 });

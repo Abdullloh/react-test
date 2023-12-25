@@ -7,6 +7,7 @@ import {
   CardContent,
   CardHeader,
   Chip,
+  IconButton,
   Stack,
   TextField,
   Typography,
@@ -17,6 +18,7 @@ import { AddAcountDialog } from "./AddAcountDialog";
 import { DialogSuccess } from "../../../components";
 import { useAppDispatch } from "../../../store";
 import { searchUser } from "../slice";
+import { IconSearch } from "../../../assets";
 
 interface IAccountListCard {
   data: IUser[];
@@ -29,6 +31,7 @@ export const AccountListCard: FC<IAccountListCard> = ({ data }) => {
 
   const handleOpenDialog = () => {
     openDialog({
+      type: "create",
       resolve: () => openSuccessDialog(),
     });
   };
@@ -39,12 +42,29 @@ export const AccountListCard: FC<IAccountListCard> = ({ data }) => {
   };
 
   return (
-    <Card sx={{ width: "80%" }}>
+    <Box
+      component={Card}
+      sx={{
+        width: { xs: "100%", lg: "80%" },
+        height: { xs: "100vh", lg: "auto" },
+      }}
+    >
       <CardHeader
         title='Команда'
         action={
-          <Stack direction='row' spacing={2}>
-            <TextField size='small' onChange={handleSearchUser} />
+          <Stack direction={{ xs: "column", lg: "row" }} spacing={2}>
+            <TextField
+              label='Поиск по Email'
+              size='small'
+              onChange={handleSearchUser}
+              InputProps={{
+                endAdornment: (
+                  <IconButton>
+                    <IconSearch viewBox='0 0 26 16' />
+                  </IconButton>
+                ),
+              }}
+            />
             <Button variant='contained' onClick={handleOpenDialog}>
               Добавить пользователя
             </Button>
@@ -94,6 +114,6 @@ export const AccountListCard: FC<IAccountListCard> = ({ data }) => {
           </Stack>
         ))}
       </CardContent>
-    </Card>
+    </Box>
   );
 };

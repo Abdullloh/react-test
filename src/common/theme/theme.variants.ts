@@ -5,4 +5,9 @@ import { components } from "./components";
 export const theme = createTheme({
   palette: lighPalette,
   components,
+  typography: {
+    button: {
+      textTransform: "none",
+    },
+  },
 });

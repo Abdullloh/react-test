@@ -1,9 +1,19 @@
 import { FC } from "react";
-import { StyledCollapse, StyledSidebar } from "./styled";
+import { StyledButton, StyledCollapse, StyledSidebar } from "./styled";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ROUTE_BASE } from "../../common/constants";
-import { IconBurger, IconLogo, IconPieChart } from "../../assets";
+import {
+  IconBanner,
+  IconBlog,
+  IconBurger,
+  IconDollar,
+  IconGroup,
+  IconLogOut,
+  IconLogo,
+  IconModerator,
+  IconPieChart,
+} from "../../assets";
 
 interface ISidebar {
   collapsed: boolean;
@@ -30,10 +40,34 @@ export const Sidebar: FC<ISidebar> = ({ collapsed, handleToggle }) => {
           </IconButton>
         </Stack>
         <Box component='nav' position='sticky' top={20}>
-          <Stack direction='row' spacing={2}>
+          <StyledButton color='inherit'>
             <IconPieChart />
             <Typography>Аналитика</Typography>
-          </Stack>
+          </StyledButton>
+          <StyledButton color='inherit'>
+            <IconModerator />
+            <Typography>Модерация</Typography>
+          </StyledButton>
+          <StyledButton color='inherit'>
+            <IconBanner />
+            <Typography>Баннеры</Typography>
+          </StyledButton>
+          <StyledButton color='inherit'>
+            <IconGroup />
+            <Typography>Команда</Typography>
+          </StyledButton>
+          <StyledButton color='inherit'>
+            <IconBlog />
+            <Typography>Блог</Typography>
+          </StyledButton>
+          <StyledButton color='inherit'>
+            <IconDollar />
+            <Typography>Курс валют</Typography>
+          </StyledButton>
+          <StyledButton color='inherit'>
+            <IconLogOut />
+            <Typography>Курс валют</Typography>
+          </StyledButton>
         </Box>
       </StyledSidebar>
     </StyledCollapse>

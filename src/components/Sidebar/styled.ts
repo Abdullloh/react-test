@@ -1,4 +1,4 @@
-import { Box, styled } from "@mui/material";
+import { Box, Button, styled } from "@mui/material";
 
 export const StyledSidebar = styled(Box)(({ theme }) => ({
   height: "100vh",
@@ -26,15 +26,34 @@ export const StyledCollapse = styled(Box)(({ theme }) => ({
     transition: "all 200ms ease-in-out",
   },
   "&.Mui-collapsed": {
-    width: 110,
+    width: 65,
     "&:after": {
       width: 0,
     },
   },
-  [theme.breakpoints.down("lg")]: {
+  [theme.breakpoints.down("xs")]: {
     position: "fixed",
     top: 0,
     bottom: 0,
-    left: 110,
+    left: 0,
+  },
+}));
+
+export const StyledButton = styled(Button)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  width: 256,
+  margin: theme.spacing(0.5, 0),
+  padding: theme.spacing(1.25, 2),
+  fontSize: 13,
+  fontWeight: 500,
+  textAlign: "left",
+  borderRadius: 6,
+  "& svg": {
+    transition: "all 250ms ease",
+    "&:first-of-type": {
+      marginRight: theme.spacing(2),
+    },
   },
 }));

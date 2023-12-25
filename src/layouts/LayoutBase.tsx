@@ -9,6 +9,7 @@ export const LayoutBase: FC = () => {
   const handleCollapse = () => {
     setCollapsed(!collapsed);
   };
+
   return (
     <Box sx={{ background: "#EBEBF0" }} component={Stack} direction='row'>
       <Sidebar collapsed={collapsed} handleToggle={handleCollapse} />

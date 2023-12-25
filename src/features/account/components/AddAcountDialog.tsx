@@ -5,6 +5,7 @@ import { AddAccountForm } from ".";
 import { useAppDispatch } from "../../../store";
 import { addUser, updateUser } from "../slice";
 import { IUser } from "../models";
+import { ADD_ACCOUNT_DEFAULT_VALUES } from "../constants";
 
 export interface IAddAcountDialog extends DialogProps {
   type: "create" | "update";
@@ -35,7 +36,9 @@ export const AddAcountDialog: FC<IAddAcountDialog> = ({
     <DialogBase {...props} title={"add user"} maxWidth='sm' fullWidth>
       <AddAccountForm
         onValid={handleSubmit}
-        defaultValues={type === "create" ? {} : props.data}
+        defaultValues={
+          type === "create" ? ADD_ACCOUNT_DEFAULT_VALUES : props.data
+        }
       />
     </DialogBase>
   );
