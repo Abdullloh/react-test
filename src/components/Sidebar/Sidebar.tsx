@@ -64,9 +64,9 @@ export const Sidebar: FC<ISidebar> = ({ collapsed, handleToggle }) => {
             <IconDollar />
             <Typography>Курс валют</Typography>
           </StyledButton>
-          <StyledButton color='inherit'>
-            <IconLogOut />
-            <Typography>Курс валют</Typography>
+          <StyledButton color='error'>
+            <IconLogOut color='error' />
+            <Typography>Выйти</Typography>
           </StyledButton>
         </Box>
       </StyledSidebar>

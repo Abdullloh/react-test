@@ -16,6 +16,7 @@ export interface IAddAcountDialog extends DialogProps {
 
 export const AddAcountDialog: FC<IAddAcountDialog> = ({
   type,
+  title,
   resolve,
   idx,
   ...props
@@ -33,7 +34,7 @@ export const AddAcountDialog: FC<IAddAcountDialog> = ({
   };
 
   return (
-    <DialogBase {...props} title={"add user"} maxWidth='sm' fullWidth>
+    <DialogBase {...props} title={title} maxWidth='sm' fullWidth>
       <AddAccountForm
         onValid={handleSubmit}
         defaultValues={

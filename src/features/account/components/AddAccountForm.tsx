@@ -1,5 +1,5 @@
 import { Box, Button, Stack } from "@mui/material";
-import { DefaultValues, FieldErrors, useForm } from "react-hook-form";
+import { DefaultValues, FieldErrors, useForm, useWatch } from "react-hook-form";
 import { TextFieldController } from "../../../components/TextFieldController/TextFieldController";
 import { ChangeEvent, FC } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,15 +15,12 @@ export const AddAccountForm: FC<IAddAccountForm> = ({
   defaultValues,
   onValid,
 }) => {
-  const { control, handleSubmit, getValues, setValue } = useForm({
+  const { control, handleSubmit, setValue } = useForm({
     defaultValues,
     resolver: yupResolver(AddAccountSchema),
   });
-  console.log(defaultValues);
 
   const onSubmit = (values: any) => {
-    console.log(values);
-
     onValid(values);
   };
 
@@ -31,20 +28,22 @@ export const AddAccountForm: FC<IAddAccountForm> = ({
     console.log("onInvalid", errors);
   };
 
-  const onSelectPermission = (e: ChangeEvent<HTMLInputElement>) => {
-    const prev = getValues();
-    console.log(prev);
-    const { value } = e.target;
+  const permissions = useWatch({
+    control,
+    name: "permissions",
+  });
 
-    if (prev?.permissions?.length > 0 && prev.permissions.includes(value)) {
-      setValue(
-        "permissions",
-        prev.permissions.filter((item) => item !== value)
-      );
+  const onSelectPermission = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (permissions.includes(value)) {
+      const newPermission = permissions.filter((item) => item !== value);
+      setValue("permissions", newPermission);
     } else {
-      setValue("permissions", [...prev.permission, value]);
+      const newValues = [...permissions, value];
+      setValue("permissions", newValues);
     }
   };
+
   return (
     <Box component='form' onSubmit={handleSubmit(onSubmit, onInvalid)}>
       <Box mb={2}>
@@ -83,7 +82,7 @@ export const AddAccountForm: FC<IAddAccountForm> = ({
       </Box>
       <Stack direction='row' justifyContent='flex-end'>
         <Button type='submit' color='primary' variant='contained'>
-          {"action.create"}
+          Сохранять
         </Button>
       </Stack>
     </Box>

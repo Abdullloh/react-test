@@ -1,8 +1,13 @@
 import { Box, Stack } from "@mui/material";
 import { useAppSelector } from "../store";
 import { AccountListCard } from "../features/account/components";
+import { FC } from "react";
 
-export const HomePage = () => {
+interface IHomePage {
+  handdleToggle: () => void;
+}
+
+export const HomePage: FC<IHomePage> = ({ handdleToggle }) => {
   const { users } = useAppSelector((state) => state.accountSlice);
 
   return (
@@ -12,7 +17,7 @@ export const HomePage = () => {
       justifyContent='center'
       height='100%'
     >
-      <AccountListCard data={users} />
+      <AccountListCard data={users} handleToggle={handdleToggle} />
     </Box>
   );
 };

@@ -1,8 +1,9 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, MouseEvent, useState } from "react";
 import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  Popover,
   TextField,
   TextFieldProps,
 } from "@mui/material";
@@ -16,6 +17,7 @@ export type ISelectFieldPermissions = Omit<
   "select" | "onChange"
 > & {
   control: Control<any>;
+
   name: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
@@ -33,6 +35,14 @@ export const SelectFieldPermissions: FC<ISelectFieldPermissions> = ({
   onChange: onCustomChange,
   ...props
 }) => {
+  const [optionsMenuOpen, setOptionsMenuOpen] = useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    setOptionsMenuOpen(true);
+    setAnchorEl(event.currentTarget);
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (onCustomChange) onCustomChange(e);
   };
@@ -51,30 +61,43 @@ export const SelectFieldPermissions: FC<ISelectFieldPermissions> = ({
           />
         }
         label={label}
-        value={value}
       />
     ));
   };
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field: { value, ...fieldProps }, fieldState: { error } }) => {
-        return (
+    <>
+      <Controller
+        name={name}
+        control={control}
+        render={({
+          field: { value, ref, ...fieldProps },
+          fieldState: { error },
+        }) => (
           <TextField
             {...{ ...props, ...fieldProps }}
-            value={value?.join(",") || ""}
+            value={value.join(",")}
             error={!!error?.message}
-            helperText={error?.message ? error.message : null}
+            helperText={error?.message}
             autoComplete='new-password'
-            defaultValue={value?.join(",") || ""}
-            select
-          >
-            <FormGroup sx={{ p: 2 }}>{renderOptions()}</FormGroup>
-          </TextField>
-        );
-      }}
-    />
+            inputRef={ref}
+            onClick={handleClick}
+            label={props.label}
+          />
+        )}
+      />
+      <Popover
+        sx={{ width: "100%" }}
+        open={optionsMenuOpen}
+        anchorEl={anchorEl}
+        onClose={() => setOptionsMenuOpen(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <FormGroup sx={{ p: 2, width: "100%" }}>{renderOptions()}</FormGroup>
+      </Popover>
+    </>
   );
 };

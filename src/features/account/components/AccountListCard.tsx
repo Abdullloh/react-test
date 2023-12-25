@@ -5,7 +5,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   Chip,
   IconButton,
   Stack,
@@ -22,6 +21,7 @@ import { IconSearch } from "../../../assets";
 
 interface IAccountListCard {
   data: IUser[];
+  handleToggle: () => void;
 }
 
 export const AccountListCard: FC<IAccountListCard> = ({ data }) => {
@@ -32,7 +32,11 @@ export const AccountListCard: FC<IAccountListCard> = ({ data }) => {
   const handleOpenDialog = () => {
     openDialog({
       type: "create",
-      resolve: () => openSuccessDialog(),
+      title: "Отправьте приглашение",
+      resolve: () =>
+        openSuccessDialog({
+          title: "Приглашение отправлено на почту example@email.com",
+        }),
     });
   };
 
@@ -49,28 +53,32 @@ export const AccountListCard: FC<IAccountListCard> = ({ data }) => {
         height: { xs: "100vh", lg: "auto" },
       }}
     >
-      <CardHeader
-        title='Команда'
-        action={
-          <Stack direction={{ xs: "column", lg: "row" }} spacing={2}>
-            <TextField
-              label='Поиск по Email'
-              size='small'
-              onChange={handleSearchUser}
-              InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <IconSearch viewBox='0 0 26 16' />
-                  </IconButton>
-                ),
-              }}
-            />
-            <Button variant='contained' onClick={handleOpenDialog}>
-              Добавить пользователя
-            </Button>
-          </Stack>
-        }
-      />
+      <Stack
+        spacing={2}
+        p={2}
+        direction={{ sx: "column", md: "row" }}
+        justifyContent='space-between'
+      >
+        <Typography variant='h6'>Команда</Typography>
+        <Stack direction={{ xs: "column", lg: "row" }} spacing={2}>
+          <TextField
+            label='Поиск по Email'
+            size='small'
+            onChange={handleSearchUser}
+            InputProps={{
+              endAdornment: (
+                <IconButton>
+                  <IconSearch viewBox='0 0 26 16' />
+                </IconButton>
+              ),
+            }}
+          />
+          <Button variant='contained' onClick={handleOpenDialog}>
+            Добавить пользователя
+          </Button>
+        </Stack>
+      </Stack>
+
       <CardContent>
         {data.map((user, idx) => (
           <Stack

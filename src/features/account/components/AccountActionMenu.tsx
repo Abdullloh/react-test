@@ -29,18 +29,21 @@ export const AccountActionMenu: FC<IAccountActionMenu> = ({ data, idx }) => {
     openDialog({
       data,
       type: "update",
+      title: "Изменить права доступа",
       idx,
-      resolve: () => {},
+      resolve: () => {
+        openSuccessDialog({ title: "Успешно обновлено" });
+      },
     });
   };
 
   const menuData: ActionMenuDataProps[] = [
     {
-      label: "action.edit",
+      label: "Изменить права доступа",
       onClick: handleEdit,
     },
     {
-      label: "action.delete",
+      label: "Удалить",
       onClick: handleDelete,
     },
   ];

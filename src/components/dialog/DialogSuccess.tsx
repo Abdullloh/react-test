@@ -18,7 +18,9 @@ export const DialogSuccess: FC<IDialogSuccess> = ({
   return (
     <DialogBase sx={{ minWidth: 500 }} {...props}>
       <Stack direction='column'>
-        <Typography>{title}</Typography>
+        <Typography variant='h6' mb={2}>
+          {title}
+        </Typography>
         <Button fullWidth variant='contained' onClick={handleClose}>
           Закрыть
         </Button>

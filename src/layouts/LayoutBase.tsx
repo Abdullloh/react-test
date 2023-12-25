@@ -14,7 +14,7 @@ export const LayoutBase: FC = () => {
     <Box sx={{ background: "#EBEBF0" }} component={Stack} direction='row'>
       <Sidebar collapsed={collapsed} handleToggle={handleCollapse} />
       <Box flex={2}>
-        <HomePage />
+        <HomePage handdleToggle={handleCollapse} />
       </Box>
     </Box>
   );
